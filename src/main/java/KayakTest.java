@@ -52,10 +52,12 @@ public class KayakTest {
             WebElement startDateField = driver.findElement(By.className("sR_k-value"));
             startDateField.click();
             WebElement month = driver.findElement(By.className("wHSr-monthName"));
-            while(month.getText().contains("diciembre 2022")){
+            boolean containsMonth = month.getText().contains("diciembre 2022");
+            while (!containsMonth){
                     WebElement nextMonth = driver.findElement(By.cssSelector("[aria-label='Mes siguiente']"));
                     nextMonth.click();
-
+                WebElement month2 = driver.findElement(By.className("wHSr-monthName"));
+                containsMonth = month2.getText().contains("diciembre 2022");
             }
             WebElement startDate = driver.findElement(By.cssSelector("[aria-label='9 de diciembre de 2022']"));
             startDate.click();
