@@ -1,5 +1,6 @@
+package sofia.selenium.Chrome;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.checkerframework.checker.regex.qual.Regex;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -8,11 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.annotation.RegEx;
-import java.security.Key;
 import java.time.Duration;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 class ChromeTest {
 
