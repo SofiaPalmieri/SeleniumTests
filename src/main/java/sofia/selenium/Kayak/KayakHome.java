@@ -12,7 +12,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 
-public class KayakHome {
+public class KayakHome extends KayakPage<KayakHome>{
     @FindBy(css = ".zEiP-origin input")
     protected WebElement originInput;
 
@@ -23,10 +23,12 @@ public class KayakHome {
     protected List<WebElement> searchButtons;
     public final KayakCalendar calendar;
 
-    WebDriver driver;
+    public String originCode;
+
+    public String destinationCode;
 
     public KayakHome(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
         this.calendar = new KayakCalendar(driver);
     }
@@ -42,12 +44,14 @@ public class KayakHome {
         input.sendKeys(Keys.ENTER);
     }
 
-    public void setOrigin(String name, int index){
+    public void setOrigin(String name, int index, String code){
         setLocation(originInput, name, index);
+        this.originCode = code;
     }
 
-    public void setDestination(String name, int index){
+    public void setDestination(String name, int index, String code){
         setLocation(destinationInput, name, index);
+        this.destinationCode = code;
     }
 
     public void submitSearch(){
@@ -56,11 +60,18 @@ public class KayakHome {
         searchButtons.get(searchButtons.size()-1).click();
     }
 
-    public void submitSimpleSearch(String origin, String destination, LocalDate startDate, LocalDate endDate){
-        this.setOrigin(origin, 1);
-        this.setDestination(destination, 1);
+    public KayakSearchResults submitSimpleSearch(String origin, String destination, String originCode, String destinationCode, LocalDate startDate, LocalDate endDate){
+        this.setOrigin(origin, 1, originCode);
+        this.setDestination(destination, 1, destinationCode);
         this.calendar.reserveDates(startDate, endDate);
         this.submitSearch();
+        return new KayakSearchResults(driver, originCode, destinationCode, startDate, endDate);
+    }
+
+    public KayakHome go(){
+        driver.get("https://www.kayak.com.ar/");
+
+        return this;
     }
 }
 

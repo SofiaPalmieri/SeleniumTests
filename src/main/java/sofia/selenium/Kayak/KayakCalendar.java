@@ -16,7 +16,7 @@ public class KayakCalendar {
     WebElement startDateField;
 
     protected static DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
-    protected static DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("d 'de' MMMM 'de' yyy");
+    protected static DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("eeee d 'de' MMMM 'de' yyy");
 
     WebDriver driver;
 
